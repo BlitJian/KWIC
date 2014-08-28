@@ -28,10 +28,11 @@ public class KWIC {
 		List<String> lines = new ArrayList<String>();
 		String line = "";
 		while(true){
+			System.out.println("Enter title:");
 			line = reader.nextLine();
 			if(!line.equals(""))
 			{
-				lines.add(line);				
+				lines.add(line);
 			}
 			else
 			{
