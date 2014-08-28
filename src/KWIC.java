@@ -84,16 +84,29 @@ public class KWIC {
 	private static List<String> sort(List<String> inputs)
 	{
 		 Comparator<String> cmp = new Comparator<String>(){
-			 public int compare(String s1, String s2){return s1.charAt(0)-s2.charAt(0);
+			 public int compare(String s1, String s2){
+				 int s1char = s1.charAt(0), s2char = s2.charAt(0);
+//				 System.out.println((char)(s2.charAt(0)-32));
+				 if(s1.charAt(0)<='z' && s1.charAt(0)>='a')
+					 s1char = s1.charAt(0) - 32;
+
+				 if(s2.charAt(0)<='z' && s2.charAt(0)>='a')
+					 s2char = s2.charAt(0) - 32;
+				 if(s1char!=s2char)
+					 return s1char-s2char;
+				 else
+					 return compare(s1.substring(1, s1.length()-1), s2.substring(1, s2.length()-1));
 			 }};
 			 inputs.sort(cmp);
 		return inputs;
 	}
 	private static void display(List<String> inputs)
 	{
+		System.out.println("Output:");
 		for(String input: inputs)
 		{
-			System.out.println(input);
+			boolean moreThanOneWord = input.contains(" ");
+			System.out.println("["+input.substring(0, (moreThanOneWord? input.indexOf(" "):input.length()))+"]"+(moreThanOneWord? input.substring(input.indexOf(" "), input.length()-1): ""));
 		}
 	}
 	
