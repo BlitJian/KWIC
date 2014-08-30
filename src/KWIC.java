@@ -12,24 +12,26 @@ public class KWIC {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub 
-
+		
 		List<String> filters = new ArrayList<String>();//Arrays.asList("is", "the", "of", "and", "as", "a", "after");
 		List<String> outputs = new ArrayList<String>();
 		System.out.println("Enter title:");
 		outputs = getLines();
 		System.out.println("Enter filter word:");
 		filters = getLines();
-		
+
+		long start = System.nanoTime();
 		outputs = rotateString(outputs);
 		outputs = filterFirstWord(outputs, filters);
 		outputs = upperCaseKey(outputs, filters);
 		outputs = sort(outputs);
 		display(outputs);
+		long stop = System.nanoTime();
+		System.out.println("Time: "+(stop-start)/1000000000.0+"s");
 	}
 
 	private static List<String> getLines()
 	{
-		int i = 0;
 		Scanner reader = new Scanner(System.in);
 		List<String> lines = new ArrayList<String>();
 		String line = "";
@@ -55,15 +57,11 @@ public class KWIC {
 		{
 			outputs.add(input);
 			String[] splitInput = input.split(" ");
+			String temp = input;
 			for(int i = 1; i<splitInput.length;i++)
 			{
-				String temp = splitInput[i%(splitInput.length)];
-				int j = i;
-				while(j%(splitInput.length)+1 != i)
-				{
-					j++;
-					temp += " "+splitInput[j%(splitInput.length)];
-				}
+				temp = (temp.substring(temp.indexOf(" ")+1, temp.length()))+ " " +temp.substring(0, input.indexOf(" "));
+				System.out.println(temp);
 				outputs.add(temp);
 			}
 		}
