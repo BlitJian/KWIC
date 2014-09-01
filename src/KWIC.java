@@ -60,9 +60,18 @@ public class KWIC {
 			String temp = input;
 			for(int i = 1; i<splitInput.length;i++)
 			{
-				temp = (temp.substring(temp.indexOf(" ")+1, temp.length()))+ " " +temp.substring(0, input.indexOf(" "));
-				System.out.println(temp);
+				temp = (temp.substring(temp.indexOf(" ")+1, temp.length()))+ " " +splitInput[i-1];
+//				System.out.println(temp);
 				outputs.add(temp);
+				
+//				String temp = splitInput[i%(splitInput.length)];
+//				int j = i;
+//				while(j%(splitInput.length)+1 != i)
+//				{
+//					j++;
+//					temp += " "+splitInput[j%(splitInput.length)];
+//				}
+//				outputs.add(temp);
 			}
 		}
 		return outputs;
@@ -103,6 +112,7 @@ public class KWIC {
 					}
 
 				}
+				
 				if(!exist && splitInput.charAt(0)<='z' && splitInput.charAt(0)>='a')
 				{
 					splitInput = (char)(splitInput.charAt(0)-32)+splitInput.substring(1, splitInput.length());
